@@ -15,8 +15,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -62,6 +66,19 @@ fun SearchView(){
                         .padding(16.dp)
                         .fillMaxWidth()
                 ) {
+                    IconButton(
+                        onClick = {
+                        },
+                        modifier = Modifier
+                            .padding(top = 1.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+
+
                     TextField(
                         value = item,
                         onValueChange = {
@@ -90,7 +107,7 @@ fun SearchView(){
                         label = { Text("Buscar") },
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
-                            .padding(top = 48.dp, start = 40.dp)
+                            .padding(top = 20.dp, start = 50.dp)
                             .clip(RoundedCornerShape(16.dp))
                     )
                 }

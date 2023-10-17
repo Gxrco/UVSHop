@@ -76,7 +76,7 @@ fun LoginView(){
                         .padding(10.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.shopping_cart),
+                        painter = painterResource(id = R.drawable.logo),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
