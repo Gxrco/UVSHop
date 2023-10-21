@@ -68,7 +68,7 @@ fun CatalogueView(){
                     .fillMaxWidth()
                     .fillMaxSize()
                     .padding(top = 20.dp)
-                    .background(color = Color.White)
+                    .background(Color.White)
                 ){
                     Image(
                         painter = painterResource(id = R.drawable.white),
@@ -76,7 +76,6 @@ fun CatalogueView(){
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background)
                     )
                     Column {
                         Box(
