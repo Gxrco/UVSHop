@@ -39,14 +39,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun SearchView(){
+fun SearchView(navController: NavController){
     var item by remember { mutableStateOf("") }
     var recentWords by remember { mutableStateOf(listOf<String>()) }
 
@@ -68,6 +68,7 @@ fun SearchView(){
                 ) {
                     IconButton(
                         onClick = {
+                                  navController.popBackStack()
                         },
                         modifier = Modifier
                             .padding(top = 1.dp)

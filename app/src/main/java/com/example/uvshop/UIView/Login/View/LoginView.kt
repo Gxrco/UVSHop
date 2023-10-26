@@ -38,13 +38,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun LoginView(){
+fun LoginView( navController: NavController){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -138,7 +139,9 @@ fun LoginView(){
                     )
 
                     Button(
-                        onClick = {},
+                        onClick = {
+                                  navController.navigate(Route.HOME)
+                        },
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
                             .padding(top = 16.dp)

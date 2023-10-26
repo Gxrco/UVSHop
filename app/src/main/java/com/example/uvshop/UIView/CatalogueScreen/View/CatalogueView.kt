@@ -31,13 +31,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
 
 
-@Preview(showBackground = true)
 @Composable
-fun CatalogueView(){
+fun CatalogueView(navController: NavController){
     Box(modifier = Modifier.fillMaxSize()){
         Image(
             painter = painterResource(id = R.drawable.fondo),
@@ -83,7 +84,9 @@ fun CatalogueView(){
                                 .fillMaxWidth(0.9f)
                                 .padding(top = 30.dp, start = 16.dp)
                                 .background(Color.LightGray, RoundedCornerShape(16.dp))
-                                .clickable { }
+                                .clickable {
+                                    navController.navigate(Route.SEARCH)
+                                }
                         ) {
                             Row(
                                 modifier = Modifier

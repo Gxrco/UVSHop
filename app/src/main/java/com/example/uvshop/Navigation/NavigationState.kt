@@ -45,7 +45,12 @@ val TOP_LEVEL_DESTINATIONS = listOf(
 )
 
 object Route{
+    const val LOGIN = "login"
     const val HOME = "home"
     const val SHOP = "shop"
     const val PROFILE = "profile"
+    const val SEARCH = "search"
+    const val PRODUCT = "product"
+    const val MYSHOP = "myshop"
+    const val REGISTER = "register"
 }

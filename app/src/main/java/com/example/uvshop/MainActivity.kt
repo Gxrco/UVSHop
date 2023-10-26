@@ -20,7 +20,7 @@ import com.example.uvshop.Navigation.Route
 import com.example.uvshop.Navigation.TOP_LEVEL_DESTINATIONS
 import com.example.uvshop.Navigation.TopLevelDestination
 import com.example.uvshop.ui.theme.UVSHopTheme
-import com.example.uvshop.Navigation.Navigation
+import com.example.uvshop.Navigation.NavigationTabs
 
 class MainActivity : ComponentActivity() {
 
@@ -33,34 +33,14 @@ class MainActivity : ComponentActivity() {
                     NavigationState(navController)
                 }
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val selectedDestination = navBackStackEntry?.destination?.route ?: Route.HOME
-                
-                Navigation(
+                val selectedDestination = navBackStackEntry?.destination?.route ?: Route.LOGIN
+
+                NavigationTabs(
                     navController = navController,
                     selectedDestination = selectedDestination,
                     navigateTopLevelDestination = navigateAction::navigateTo
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun BottomBarNavigation(
-    selectedDestination: String,
-    navigateTopLevelDestination: (TopLevelDestination) -> Unit
-){
-    NavigationBar(modifier = Modifier.fillMaxWidth()){
-        TOP_LEVEL_DESTINATIONS.forEach{ destinations ->
-            NavigationBarItem(
-                selected = selectedDestination == destinations.route,
-                onClick = { navigateTopLevelDestination(destinations) },
-                icon = {
-                       Icon(
-                           imageVector = destinations.selectedIcon,
-                           contentDescription = stringResource(id = destinations.iconTextId))
-                },
-            )
         }
     }
 }
