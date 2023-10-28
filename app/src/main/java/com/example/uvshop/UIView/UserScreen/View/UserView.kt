@@ -45,12 +45,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
+import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
 
-@Preview
 @Composable
-fun UserView(){
+fun UserView(navController: NavController){
     val addresses = listOf("HOGAR", "UNIVERSIDAD", "HOTEL", "PARQUE", "CIUDAD", "OFICINA")
     LazyColumn(){
         item {
@@ -112,7 +113,14 @@ fun UserView(){
                             fontSize = 20.sp,
                         )
                         Button(
-                            onClick = {},
+                            onClick = {
+                                if (GlobalData.myGlobalVariable){
+                                    navController.navigate(route = Route.MYSHOP)
+
+                                }else{
+                                    navController.navigate(route = Route.REGISTER)
+                                }
+                            },
                             modifier = Modifier
                                 .fillMaxWidth(12 / 23f)
                                 .padding(top = 16.dp),
@@ -199,6 +207,10 @@ fun AddressesList(AddressList: List<String>){
         Spacer(modifier = Modifier.height(12.dp))
         Divider(thickness = 1.dp, color = Color(0xFFF3F3F3), modifier = Modifier.fillMaxWidth(21/23f))
     }
+}
+
+object GlobalData {
+    var myGlobalVariable: Boolean = false
 }
 
 

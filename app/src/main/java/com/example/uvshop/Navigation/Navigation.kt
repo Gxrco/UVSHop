@@ -15,8 +15,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.uvshop.UIView.CatalogueScreen.View.CatalogueView
 import com.example.uvshop.UIView.Login.View.LoginView
+import com.example.uvshop.UIView.MyShopScreen.View.MyShopView
 import com.example.uvshop.UIView.PrincipalScreen.View.PrincipalView
+import com.example.uvshop.UIView.ProductScreen.View.ProductView
 import com.example.uvshop.UIView.SearchScreen.View.SearchView
+import com.example.uvshop.UIView.ShopScreen.View.ShopView
 import com.example.uvshop.UIView.UserScreen.View.UserView
 
 
@@ -46,10 +49,19 @@ fun NavigationTabs(
                 }
 
                 composable(route = Route.PROFILE) {
-                    UserView()
+                    UserView(navController)
                 }
                 composable(route = Route.SEARCH) {
                     SearchView(navController)
+                }
+                composable(route = Route.REGISTER){
+                    ShopView(navController)
+                }
+                composable(route = Route.PRODUCT){
+                    ProductView(navController)
+                }
+                composable(route = Route.MYSHOP){
+                    MyShopView(navController)
                 }
             }
 

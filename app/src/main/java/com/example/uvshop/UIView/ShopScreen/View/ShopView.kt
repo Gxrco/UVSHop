@@ -47,12 +47,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.uvshop.R
+import com.example.uvshop.UIView.UserScreen.View.GlobalData
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun ShopView() {
+fun ShopView(navController: NavController) {
     var entrepreneurName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var checked by remember { mutableStateOf(false) }
@@ -77,7 +78,9 @@ fun ShopView() {
                     ) {
                         //Back Button
                         IconButton(
-                            onClick = {},
+                            onClick = {
+                                      navController.popBackStack()
+                            },
                             modifier = Modifier
                                 .padding(30.dp)
                                 .size(35.dp)
@@ -130,7 +133,7 @@ fun ShopView() {
                             }
                             TextField(
                                 value = entrepreneurName,
-                                onValueChange = {},
+                                onValueChange = {entrepreneurName = it},
                                 label = { Text("Ingrese el nombre") },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
@@ -160,7 +163,7 @@ fun ShopView() {
                             }
                             TextField(
                                 value = description,
-                                onValueChange = {},
+                                onValueChange = {description = it},
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 4.dp)
@@ -196,7 +199,10 @@ fun ShopView() {
                                 )
                             }
                             Button(
-                                onClick = {},
+                                onClick = {
+                                    navController.popBackStack()
+                                    GlobalData.myGlobalVariable = true
+                                },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 12.dp),

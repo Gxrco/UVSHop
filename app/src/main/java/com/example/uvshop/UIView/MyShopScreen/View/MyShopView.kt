@@ -45,12 +45,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
+import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
 
-@Preview
 @Composable
-fun MyShopView(){
+fun MyShopView(navController: NavController){
     val addresses = listOf("HOGAR", "UNIVERSIDAD", "HOTEL", "PARQUE", "CIUDAD", "OFICINA")
     val prices = listOf("Q.10.00","Q.50.00","Q.35.50","Q.12.00","Q.10.00","Q.35.00")
 
@@ -90,7 +91,9 @@ fun MyShopView(){
                                 .background(Color.Transparent)){
                             //Back Button
                             IconButton(
-                                onClick = {},
+                                onClick = {
+                                          navController.popBackStack()
+                                },
                                 modifier = Modifier
                                     .padding(30.dp)
                                     .size(35.dp)
@@ -191,7 +194,9 @@ fun MyShopView(){
         }
 
         FloatingActionButton(
-            onClick = { /*TODO*/ },
+            onClick = {
+                      navController.navigate(route = Route.PRODUCT)
+            },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp),

@@ -114,7 +114,7 @@ fun LoginView( navController: NavController){
                     )
                     TextField(
                         value = username,
-                        onValueChange = {},
+                        onValueChange = {username =it},
                         label = { Text("cuenta@uvg.edu.gt") },
                         modifier = Modifier
                             .fillMaxWidth(0.8f)

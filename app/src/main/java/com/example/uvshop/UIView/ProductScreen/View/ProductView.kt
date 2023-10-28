@@ -50,11 +50,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.uvshop.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductView() {
+fun ProductView(navController: NavController) {
 
     var product by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
@@ -80,7 +81,9 @@ fun ProductView() {
                     ) {
                         //Back Button
                         IconButton(
-                            onClick = {},
+                            onClick = {
+                                      navController.popBackStack()
+                            },
                             modifier = Modifier
                                 .padding(30.dp)
                                 .size(35.dp)
@@ -135,7 +138,7 @@ fun ProductView() {
                             }
                             TextField(
                                 value = product,
-                                onValueChange = {},
+                                onValueChange = {product = it},
                                 label = { Text("Ingrese el nombre del producto") },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
@@ -154,7 +157,7 @@ fun ProductView() {
                             }
                             TextField(
                                 value = price,
-                                onValueChange = {},
+                                onValueChange = {price = it},
                                 label = { Text("Ingrese el precio del producto") },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
@@ -174,7 +177,7 @@ fun ProductView() {
                             TextField(
                                 value = description,
                                 label = { Text("Escribe una breve descripción...") },
-                                onValueChange = {},
+                                onValueChange = {description = it},
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 4.dp)
@@ -245,7 +248,9 @@ fun ProductView() {
 
                             }
                             Button(
-                                onClick = {},
+                                onClick = {
+                                          navController.popBackStack()
+                                },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 20.dp),
