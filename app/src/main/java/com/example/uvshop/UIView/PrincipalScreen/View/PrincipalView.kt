@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,8 +25,8 @@ import com.example.uvshop.UIView.CarouselCard
 
 @Preview(showBackground = true)
 @Composable
-fun PrincipalView(){
-    Box(modifier = Modifier.fillMaxSize()){
+fun PrincipalView() {
+    Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.fondo),
             contentDescription = null,
@@ -34,7 +35,7 @@ fun PrincipalView(){
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         )
-        LazyColumn(){
+        LazyColumn() {
             item {
                 Column(
                     modifier = Modifier
@@ -42,7 +43,7 @@ fun PrincipalView(){
                         .fillMaxWidth()
                 ) {
                     Text(
-                        text = "Bienvenido!",
+                        text = stringResource(id = R.string.bienvenido),
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                         color = Color.White,
                         modifier = Modifier
@@ -52,7 +53,7 @@ fun PrincipalView(){
                     )
 
                     Text(
-                        text = "Usuario",
+                        text = stringResource(id = R.string.usuario),
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                         modifier = Modifier
@@ -61,12 +62,13 @@ fun PrincipalView(){
                             .scale(1.5f)
                     )
                 }
-                Box( modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxSize()
-                    .padding(top = 20.dp)
-                    .background(color = Color.White)
-                ){
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxSize()
+                        .padding(top = 20.dp)
+                        .background(color = Color.White)
+                ) {
                     Image(
                         painter = painterResource(id = R.drawable.white),
                         contentDescription = null,
@@ -76,18 +78,29 @@ fun PrincipalView(){
                             .background(MaterialTheme.colorScheme.background)
                     )
                     Column {
-                        Text(text = "NOVEDADES", modifier = Modifier.padding(top=25.dp, start = 48.dp), color = Color.Gray)
+                        Text(
+                            text = stringResource(id = R.string.novedades),
+                            modifier = Modifier.padding(top = 25.dp, start = 48.dp),
+                            color = Color.Gray
+                        )
                         CarouselCard()
 
-                        Text(text = "FAVORITOS", modifier = Modifier.padding(top=16.dp, start = 48.dp), color = Color.Gray)
+                        Text(
+                            text = stringResource(id = R.string.favoritos),
+                            modifier = Modifier.padding(top = 16.dp, start = 48.dp),
+                            color = Color.Gray
+                        )
                         CarouselCard()
 
-                        Text(text = "POPULARES", modifier = Modifier.padding(top=16.dp, start = 48.dp), color = Color.Gray)
+                        Text(
+                            text = stringResource(id = R.string.populares),
+                            modifier = Modifier.padding(top = 16.dp, start = 48.dp),
+                            color = Color.Gray
+                        )
                         CarouselCard()
                     }
                 }
             }
         }
-
     }
 }

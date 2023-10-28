@@ -1,7 +1,59 @@
 <resources>
     <string name="app_name">UVSHop</string>
-
     <string name="home">Home</string>
     <string name="shop">Shop</string>
     <string name="profile">Profile</string>
+    <string name="mi_carrito">MI CARRITO</string>
+    <string name="buscar">BUSCAR</string>
+    <string name="password">CONSTRASEÑA</string>
+    <string name="en_carrito">EN CARRITO</string>
+    <string name="mi_lista_deseos">MI LISTA DE DESEOS</string>
+    <string name="finalizar_compra">Finalizar Compra</string>
+    <string name="limpiar_carrito">Limpiar Carrito</string>
+    <string name="enter_to_start">Ingresa para iniciar</string>
+    <string name="institutional_email">CORRE INSTITUCIONAL</string>
+    <string name="email_hint">cuenta@uvg.edu.gt</string>
+    <string name="password_hint">*******</string>
+    <string name="login_button_text">Ingresar</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="request_help">Solicita ayuda</string>
+    <string name="mi_tienda">MI TIENDA</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lorem dui, porttitor a neque sed, porttito.</string>
+    <string name="productos">PRODUCTOS</string>
+    <string name="bienvenido">Bienvenido!</string>
+    <string name="usuario">Usuario</string>
+    <string name="novedades">NOVEDADES</string>
+    <string name="favoritos">FAVORITOS</string>
+    <string name="populares">POPULARES</string>
+    <string name="agregar_producto">Agregar\nProducto</string>
+    <string name="adjuntar_imagenes">ADJUNTAR IMÁGENES</string>
+    <string name="nombre_producto">NOMBRE DE PRODUCTO*</string>
+    <string name="precio">PRECIO*</string>
+    <string name="ingrese_nombre_producto">Ingrese el nombre del producto</string>
+    <string name="ingrese_precio_producto">Ingrese el precio del producto</string>
+    <string name="escriba_descripcion">Escribe una breve descripción…</string>
+    <string name="adjuntar_nueva_imagen">Cargar nueva imagen</string>
+    <string name="añadir_producto">Añadir producto</string>
+    <string name="recientes">RECIENTES</string>
+    <string name="recomendados">RECOMENDADOS</string>
+    <string name="back">Back</string>
+    <string name="registro_tienda">Registro de\ntu tienda</string>
+    <string name="entrepreneur_name_label">NOMBRE DE EMPRENDIMIENTO</string>
+    <string name="categoria">CATEGORÍA</string>
+    <string name="descripcion">DESCRIPCIÓN</string>
+    <string name="normas_acuerdo">Estoy de acuerdo con cumplir las normas\ndentro de la aplicación</string>
+    <string name="registrar">Registrar</string>
+    <string name="selecciona_categoria">Selecciona la categoría</string>
+    <string-array name="categoria_options">
+        <item>Tecnologia</item>
+        <item>Comida</item>
+        <item>Belleza</item>
+        <item>Servicio</item>
+    </string-array>
+    <string name="emprendimiento_nombre">Nombre de Emprendimiento</string>
+
+    <string name="user_name">JUAN CARLOS BODOQUE</string>
+    <string name="manage_store">Gestionar mi tienda</string>
+    <string name="my_orders">MIS PEDIDOS</string>
+    <string name="addresses">DIRECCIONES</string>
 </resources>

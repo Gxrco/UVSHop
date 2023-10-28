@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -57,7 +58,6 @@ fun ShopView(navController: NavController) {
     var entrepreneurName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var checked by remember { mutableStateOf(false) }
-
 
     LazyColumn() {
         item {
@@ -79,7 +79,7 @@ fun ShopView(navController: NavController) {
                         //Back Button
                         IconButton(
                             onClick = {
-                                      navController.popBackStack()
+                                navController.popBackStack()
                             },
                             modifier = Modifier
                                 .padding(30.dp)
@@ -88,7 +88,7 @@ fun ShopView(navController: NavController) {
                         ) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
-                                contentDescription = "Back",
+                                contentDescription = stringResource(id = R.string.back),
                                 modifier = Modifier.fillMaxSize(),
                                 tint = Color.White
                             )
@@ -110,12 +110,14 @@ fun ShopView(navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Spacer(modifier = Modifier.height(20.dp))
-                            Text(text = "Registro de \n  tu tienda",
+                            Text(
+                                text = stringResource(id = R.string.registro_tienda),
                                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
                                 color = Color.Black,
                                 fontSize = 30.sp,
                             )
-                            Text(text = "¿Desea iniciar un emprendimiento?",
+                            Text(
+                                text = "¿Desea iniciar un emprendimiento?",
                                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light),
                                 color = Color.Black,
                                 fontSize = 15.sp,
@@ -126,15 +128,15 @@ fun ShopView(navController: NavController) {
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 16.dp), horizontalArrangement = Arrangement.Start) {
                                 Text(
-                                    text = "NOMBRE DE EMPRENDIMIENTO",
+                                    text = stringResource(id = R.string.emprendimiento_nombre),
                                     color = Color.Gray,
                                     textAlign = TextAlign.Left
                                 )
                             }
                             TextField(
                                 value = entrepreneurName,
-                                onValueChange = {entrepreneurName = it},
-                                label = { Text("Ingrese el nombre") },
+                                onValueChange = { entrepreneurName = it },
+                                label = { Text(stringResource(id = R.string.entrepreneur_name_label)) },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 4.dp)
@@ -145,25 +147,25 @@ fun ShopView(navController: NavController) {
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 16.dp), horizontalArrangement = Arrangement.Start) {
                                 Text(
-                                    text = "CATEGORÍA",
+                                    text = stringResource(id = R.string.categoria),
                                     color = Color.Gray,
                                     textAlign = TextAlign.Left
                                 )
                             }
-                            DropdownMenuOpt("Selecciona la categoría")
+                            DropdownMenuOpt(stringResource(id = R.string.selecciona_categoria))
                             Row(
                                 Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 16.dp), horizontalArrangement = Arrangement.Start) {
                                 Text(
-                                    text = "DESCRIPCIÓN",
+                                    text = stringResource(id = R.string.descripcion),
                                     color = Color.Gray,
                                     textAlign = TextAlign.Left
                                 )
                             }
                             TextField(
                                 value = description,
-                                onValueChange = {description = it},
+                                onValueChange = { description = it },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 4.dp)
@@ -191,7 +193,8 @@ fun ShopView(navController: NavController) {
                                         .size(40.dp) // Adjust the size as needed
                                         .clip(CircleShape) // Apply the circular shape modifier
                                 )
-                                Text(text = "Estoy de acuerdo con cumplir las normas \ndentro de la aplicación",
+                                Text(
+                                    text = stringResource(id = R.string.normas_acuerdo),
                                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light),
                                     color = Color.DarkGray,
                                     fontSize = 13.sp,
@@ -210,7 +213,7 @@ fun ShopView(navController: NavController) {
                                 colors = ButtonDefaults.buttonColors(Color(0xFF0BA259))
                             ) {
                                 Text(
-                                    text = "Registrar",
+                                    text = stringResource(id = R.string.registrar),
                                     color = Color.White,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 12.sp
@@ -224,6 +227,7 @@ fun ShopView(navController: NavController) {
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropdownMenuOpt(

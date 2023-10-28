@@ -39,6 +39,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,16 +50,15 @@ import androidx.navigation.NavController
 import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
-
 @Composable
-fun MyShopView(navController: NavController){
+fun MyShopView(navController: NavController) {
     val addresses = listOf("HOGAR", "UNIVERSIDAD", "HOTEL", "PARQUE", "CIUDAD", "OFICINA")
-    val prices = listOf("Q.10.00","Q.50.00","Q.35.50","Q.12.00","Q.10.00","Q.35.00")
+    val prices = listOf("Q.10.00", "Q.50.00", "Q.35.50", "Q.12.00", "Q.10.00", "Q.35.00")
 
-    Box(Modifier.fillMaxSize()){
-        LazyColumn(){
+    Box(Modifier.fillMaxSize()) {
+        LazyColumn() {
             item {
-                Box(){
+                Box() {
                     Image(
                         painter = painterResource(id = R.drawable.fondoshort),
                         contentDescription = null,
@@ -67,16 +67,18 @@ fun MyShopView(navController: NavController){
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.background)
                     )
-                    Box(modifier = Modifier
-                        .size(130.dp)
-                        .align(Alignment.TopCenter)
-                        .offset(100.dp, 60.dp)
-                        .clip(RoundedCornerShape(15.dp))
-                        .zIndex(1f)
-                        .border(
-                            BorderStroke(3.dp, Color(0xFFF3F3F3)),
-                            shape = RoundedCornerShape(15.dp)
-                        )){
+                    Box(
+                        modifier = Modifier
+                            .size(130.dp)
+                            .align(Alignment.TopCenter)
+                            .offset(100.dp, 60.dp)
+                            .clip(RoundedCornerShape(15.dp))
+                            .zIndex(1f)
+                            .border(
+                                BorderStroke(3.dp, Color(0xFFF3F3F3)),
+                                shape = RoundedCornerShape(15.dp)
+                            )
+                    ) {
                         Image(
                             painter = painterResource(id = R.drawable.person),
                             contentDescription = "Foto de perfil",
@@ -88,11 +90,12 @@ fun MyShopView(navController: NavController){
                         Row(
                             Modifier
                                 .fillMaxWidth()
-                                .background(Color.Transparent)){
-                            //Back Button
+                                .background(Color.Transparent)
+                        ) {
+                            // Back Button
                             IconButton(
                                 onClick = {
-                                          navController.popBackStack()
+                                    navController.popBackStack()
                                 },
                                 modifier = Modifier
                                     .padding(30.dp)
@@ -118,39 +121,46 @@ fun MyShopView(navController: NavController){
                             Row(
                                 Modifier
                                     .fillMaxWidth(0.85f)
-                                    .padding(top = 25.dp), horizontalArrangement = Arrangement.Start) {
-                                Text(text = "MI TIENDA",
+                                    .padding(top = 25.dp),
+                                horizontalArrangement = Arrangement.Start
+                            ) {
+                                Text(
+                                    text = stringResource(id = R.string.mi_tienda),
                                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                                     color = Color.Black,
                                     fontSize = 25.sp,
                                 )
                             }
                             Spacer(modifier = Modifier.height(20.dp))
-                            Row(modifier = Modifier
-                                .fillMaxWidth(0.85f)
-                                .background(
-                                    shape = RoundedCornerShape(16.dp),
-                                    color = Color(0xFFE6E0ED)
-                                )
-                                .height(110.dp),
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(0.85f)
+                                    .background(
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = Color(0xFFE6E0ED)
+                                    )
+                                    .height(110.dp),
                                 horizontalArrangement = Arrangement.Center,
                                 verticalAlignment = Alignment.CenterVertically
-                            ){
+                            ) {
                                 Column(Modifier.padding(20.dp)) {
-                                    Text(text = "Categoria: lorem ipsum", color = Color.DarkGray)
-                                    Text(text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lorem dui, porttitor a neque sed, porttito.",
-                                        textAlign = TextAlign.Justify, color = Color.DarkGray)
+                                    Text(text = stringResource(id = R.string.categoria), color = Color.DarkGray)
+                                    Text(
+                                        text = stringResource(id = R.string.lorem_ipsum),
+                                        textAlign = TextAlign.Justify,
+                                        color = Color.DarkGray
+                                    )
                                 }
                             }
                             Spacer(modifier = Modifier.height(25.dp))
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
                                 Text(
-                                    text = "PRODUCTOS",
+                                    text = stringResource(id = R.string.productos),
                                     color = Color.Black,
                                     fontWeight = FontWeight.Light,
                                     fontSize = 12.sp,
                                     letterSpacing = 1.sp,
-                                    modifier = Modifier.padding(start = 28.dp )
+                                    modifier = Modifier.padding(start = 28.dp)
                                 )
                             }
                             Spacer(modifier = Modifier.height(10.dp))
@@ -195,7 +205,7 @@ fun MyShopView(navController: NavController){
 
         FloatingActionButton(
             onClick = {
-                      navController.navigate(route = Route.PRODUCT)
+                navController.navigate(route = Route.PRODUCT)
             },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -206,6 +216,4 @@ fun MyShopView(navController: NavController){
             Icon(Icons.Filled.Add, contentDescription = "Add")
         }
     }
-
-
 }

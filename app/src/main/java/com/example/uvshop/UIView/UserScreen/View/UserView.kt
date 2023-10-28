@@ -39,6 +39,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -107,17 +108,17 @@ fun UserView(navController: NavController){
                             .background(Color.White)
                     ) {
                         Spacer(modifier = Modifier.height(60.dp))
-                        Text(text = "JUAN CARLOS BODOQUE",
+                        Text(
+                            text = stringResource(id = R.string.user_name), // Usar stringResource
                             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                             color = Color.Black,
                             fontSize = 20.sp,
                         )
                         Button(
                             onClick = {
-                                if (GlobalData.myGlobalVariable){
+                                if (GlobalData.myGlobalVariable) {
                                     navController.navigate(route = Route.MYSHOP)
-
-                                }else{
+                                } else {
                                     navController.navigate(route = Route.REGISTER)
                                 }
                             },
@@ -129,12 +130,12 @@ fun UserView(navController: NavController){
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Star,
-                                contentDescription = "Gestionar tienda",
+                                contentDescription = stringResource(id = R.string.manage_store), // Usar stringResource
                                 tint = Color.White,
                                 modifier = Modifier.padding(end = 5.dp)
                             )
                             Text(
-                                text = "Gestionar mi tienda",
+                                text = stringResource(id = R.string.manage_store), // Usar stringResource
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 12.sp
@@ -169,13 +170,13 @@ fun UserView(navController: NavController){
 @Composable
 fun AddressesList(AddressList: List<String>){
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
-    Text(
-        text = "DIRECCIONES",
-        color = Color.Black,
-        fontWeight = FontWeight.Light,
-        fontSize = 12.sp,
-        letterSpacing = 1.sp,
-        modifier = Modifier.padding(start = 20.dp )
+        Text(
+            text = stringResource(id = R.string.addresses), // Usar stringResource
+            color = Color.Black,
+            fontWeight = FontWeight.Light,
+            fontSize = 12.sp,
+            letterSpacing = 1.sp,
+            modifier = Modifier.padding(start = 20.dp)
         )
     }
     Spacer(modifier = Modifier.height(10.dp))

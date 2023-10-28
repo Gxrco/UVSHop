@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -56,7 +57,7 @@ fun CatalogueView(navController: NavController){
                         .fillMaxWidth()
                 ) {
                     Text(
-                        text = "MI CARRITO",
+                        text = stringResource(id = R.string.mi_carrito),
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                         color = Color.White,
                         modifier = Modifier
@@ -104,7 +105,7 @@ fun CatalogueView(navController: NavController){
                                 Spacer(modifier = Modifier.width(16.dp))
 
                                 Text(
-                                    text = "BUSCAR",
+                                    text = stringResource(id = R.string.buscar),
                                     modifier = Modifier
                                         .align(Alignment.CenterVertically),
                                     color = Color.Gray
@@ -117,14 +118,14 @@ fun CatalogueView(navController: NavController){
                             .padding(horizontal = 48.dp)
                             .fillMaxWidth())
 
-                        Text(text = "EN CARRITO", modifier = Modifier.padding(top=25.dp, start = 48.dp), color = Color.Gray)
+                        Text(text = stringResource(id = R.string.en_carrito), modifier = Modifier.padding(top=25.dp, start = 48.dp), color = Color.Gray)
                         CarouselCard()
 
                         Divider(modifier = Modifier
                             .padding(horizontal = 48.dp)
                             .fillMaxWidth())
 
-                        Text(text = "MI LISTA DE DESEOS", modifier = Modifier.padding(top=16.dp, start = 48.dp), color = Color.Gray)
+                        Text(text = stringResource(id = R.string.mi_lista_deseos), modifier = Modifier.padding(top=16.dp, start = 48.dp), color = Color.Gray)
                         CarouselCard()
 
                         Row(modifier = Modifier.padding(start = 40.dp)) {
@@ -133,10 +134,10 @@ fun CatalogueView(navController: NavController){
                                 modifier = Modifier
                                     .padding(top = 16.dp)
                                     .clip(RoundedCornerShape(16.dp))
-                                    .clickable {  },
+                                    .clickable { },
                                 colors = ButtonDefaults.buttonColors(Color.Green)
                             ) {
-                                Text(text = "Finalizar Compra", color = Color.White)
+                                Text(text = stringResource(id = R.string.finalizar_compra), color = Color.White)
                             }
 
                             Spacer(modifier = Modifier.width(16.dp))
@@ -146,10 +147,10 @@ fun CatalogueView(navController: NavController){
                                 modifier = Modifier
                                     .padding(top = 16.dp)
                                     .clip(RoundedCornerShape(16.dp))
-                                    .clickable {  },
+                                    .clickable { },
                                 colors = ButtonDefaults.buttonColors(Color.Green)
                             ) {
-                                Text(text = "Limpiar Carrito", color = Color.White)
+                                Text(text = stringResource(id = R.string.limpiar_carrito), color = Color.White)
                             }
                         }
 

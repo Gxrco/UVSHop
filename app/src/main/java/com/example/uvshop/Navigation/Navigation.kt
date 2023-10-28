@@ -65,7 +65,7 @@ fun NavigationTabs(
                 }
             }
 
-            if (selectedDestination != Route.LOGIN && selectedDestination!= Route.SEARCH) {
+            if (selectedDestination != Route.LOGIN && selectedDestination!= Route.SEARCH && selectedDestination!= Route.PRODUCT && selectedDestination!= Route.MYSHOP) {
                 BottomBarNavigation(
                     selectedDestination = selectedDestination,
                     navigateTopLevelDestination = navigateTopLevelDestination

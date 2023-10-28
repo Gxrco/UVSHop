@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,7 +68,7 @@ fun SearchView(navController: NavController){
                 ) {
                     IconButton(
                         onClick = {
-                                  navController.popBackStack()
+                            navController.popBackStack()
                         },
                         modifier = Modifier
                             .padding(top = 1.dp)
@@ -78,7 +78,6 @@ fun SearchView(navController: NavController){
                             contentDescription = "Back"
                         )
                     }
-
 
                     TextField(
                         value = item,
@@ -105,7 +104,7 @@ fun SearchView(navController: NavController){
                             onDone = {
                             }
                         ),
-                        label = { Text("Buscar") },
+                        label = { Text(stringResource(id = R.string.buscar)) },
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
                             .padding(top = 20.dp, start = 50.dp)
@@ -136,7 +135,7 @@ fun SearchView(navController: NavController){
                         )
 
                         Text(
-                            text = "RECIENTES",
+                            text = stringResource(id = R.string.recientes),
                             modifier = Modifier.padding(top = 5.dp, start = 48.dp),
                             color = Color.Gray
                         )
@@ -188,8 +187,6 @@ fun SearchView(navController: NavController){
                             }
                         }
 
-
-
                         Divider(
                             modifier = Modifier
                                 .padding(top = 32.dp)
@@ -198,12 +195,11 @@ fun SearchView(navController: NavController){
                         )
 
                         Text(
-                            text = "RECOMENDADOS",
+                            text = stringResource(id = R.string.recomendados),
                             modifier = Modifier.padding(top = 16.dp, start = 48.dp, bottom = 32.dp),
                             color = Color.Gray
                         )
                         CarouselCard()
-
                     }
                 }
             }

@@ -45,6 +45,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -82,7 +83,7 @@ fun ProductView(navController: NavController) {
                         //Back Button
                         IconButton(
                             onClick = {
-                                      navController.popBackStack()
+                                navController.popBackStack()
                             },
                             modifier = Modifier
                                 .padding(30.dp)
@@ -115,12 +116,14 @@ fun ProductView(navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Spacer(modifier = Modifier.height(20.dp))
-                            Text(text = "Agregar\nProducto",
+                            Text(
+                                text = stringResource(id = R.string.agregar_producto),
                                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
                                 color = Color.Black,
                                 fontSize = 30.sp,
                             )
-                            Text(text = "¡Añade un nuevo producto a tu catálogo!",
+                            Text(
+                                text = "¡Añade un nuevo producto a tu catálogo!",
                                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light),
                                 color = Color.Black,
                                 fontSize = 15.sp,
@@ -131,15 +134,15 @@ fun ProductView(navController: NavController) {
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 16.dp), horizontalArrangement = Arrangement.Start) {
                                 Text(
-                                    text = "NOMBRE DE PRODUCTO*",
+                                    text = stringResource(id = R.string.nombre_producto),
                                     color = Color.Gray,
                                     textAlign = TextAlign.Left
                                 )
                             }
                             TextField(
                                 value = product,
-                                onValueChange = {product = it},
-                                label = { Text("Ingrese el nombre del producto") },
+                                onValueChange = { product = it },
+                                label = { Text(stringResource(id = R.string.ingrese_nombre_producto)) },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 4.dp)
@@ -150,15 +153,15 @@ fun ProductView(navController: NavController) {
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 16.dp), horizontalArrangement = Arrangement.Start) {
                                 Text(
-                                    text = "PRECIO*",
+                                    text = stringResource(id = R.string.precio),
                                     color = Color.Gray,
                                     textAlign = TextAlign.Left
                                 )
                             }
                             TextField(
                                 value = price,
-                                onValueChange = {price = it},
-                                label = { Text("Ingrese el precio del producto") },
+                                onValueChange = { price = it },
+                                label = { Text(stringResource(id = R.string.ingrese_precio_producto)) },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 4.dp)
@@ -169,15 +172,15 @@ fun ProductView(navController: NavController) {
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 16.dp), horizontalArrangement = Arrangement.Start) {
                                 Text(
-                                    text = "DESCRIPCIÓN",
+                                    text = stringResource(id = R.string.descripcion),
                                     color = Color.Gray,
                                     textAlign = TextAlign.Left
                                 )
                             }
                             TextField(
                                 value = description,
-                                label = { Text("Escribe una breve descripción...") },
-                                onValueChange = {description = it},
+                                label = { Text(stringResource(id = R.string.escriba_descripcion)) },
+                                onValueChange = { description = it },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 4.dp)
@@ -189,28 +192,30 @@ fun ProductView(navController: NavController) {
                                     .fillMaxWidth(0.8f)
                                     .padding(top = 16.dp), horizontalArrangement = Arrangement.Start) {
                                 Text(
-                                    text = "ADJUNTAR IMÁGENES",
+                                    text = stringResource(id = R.string.adjuntar_imagenes),
                                     color = Color.Gray,
                                     textAlign = TextAlign.Left
                                 )
                             }
-                            Row(modifier = Modifier
-                                .fillMaxWidth(0.8f)
-                                .background(
-                                    shape = RoundedCornerShape(16.dp),
-                                    color = Color(0xFFE6E0ED)
-                                )
-                                .height(100.dp),
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(0.8f)
+                                    .background(
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = Color(0xFFE6E0ED)
+                                    )
+                                    .height(100.dp),
                                 horizontalArrangement = Arrangement.Center,
                                 verticalAlignment = Alignment.CenterVertically
-                            ){
-                                Box(modifier = Modifier
-                                    .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
-                                    .size(80.dp),
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
+                                        .size(80.dp),
                                 ) {
                                     Icon(
                                         imageVector = Icons.Rounded.Add,
-                                        contentDescription = "Cargar nueva imagen",
+                                        contentDescription = stringResource(id = R.string.adjuntar_nueva_imagen),
                                         tint = Color.White,
                                         modifier = Modifier
                                             .align(Alignment.Center)
@@ -218,13 +223,14 @@ fun ProductView(navController: NavController) {
                                     )
                                 }
                                 Spacer(Modifier.width(15.dp))
-                                Box(modifier = Modifier
-                                    .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
-                                    .size(80.dp),
+                                Box(
+                                    modifier = Modifier
+                                        .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
+                                        .size(80.dp),
                                 ) {
                                     Icon(
                                         imageVector = Icons.Rounded.Add,
-                                        contentDescription = "Cargar nueva imagen",
+                                        contentDescription = stringResource(id = R.string.adjuntar_nueva_imagen),
                                         tint = Color.White,
                                         modifier = Modifier
                                             .align(Alignment.Center)
@@ -232,24 +238,24 @@ fun ProductView(navController: NavController) {
                                     )
                                 }
                                 Spacer(Modifier.width(15.dp))
-                                Box(modifier = Modifier
-                                    .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
-                                    .size(80.dp),
+                                Box(
+                                    modifier = Modifier
+                                        .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
+                                        .size(80.dp),
                                 ) {
                                     Icon(
                                         imageVector = Icons.Rounded.Add,
-                                        contentDescription = "Cargar nueva imagen",
+                                        contentDescription = stringResource(id = R.string.adjuntar_nueva_imagen),
                                         tint = Color.White,
                                         modifier = Modifier
                                             .align(Alignment.Center)
                                             .fillMaxSize(0.8f)
                                     )
                                 }
-
                             }
                             Button(
                                 onClick = {
-                                          navController.popBackStack()
+                                    navController.popBackStack()
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
@@ -258,7 +264,7 @@ fun ProductView(navController: NavController) {
                                 colors = ButtonDefaults.buttonColors(Color(0xFF0BA259))
                             ) {
                                 Text(
-                                    text = "Añadir producto",
+                                    text = stringResource(id = R.string.añadir_producto),
                                     color = Color.White,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 15.sp

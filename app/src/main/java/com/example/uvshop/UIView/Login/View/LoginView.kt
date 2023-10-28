@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -44,13 +45,11 @@ import com.example.uvshop.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginView( navController: NavController){
+fun LoginView(navController: NavController) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-    ){
+    Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.fondo),
             contentDescription = null,
@@ -59,8 +58,7 @@ fun LoginView( navController: NavController){
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         )
-        Column(
-        ) {
+        Column() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -79,22 +77,21 @@ fun LoginView( navController: NavController){
                         painter = painterResource(id = R.drawable.logo),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
-            Box( modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxSize()
-                .padding(top = 20.dp)
-            ){
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxSize()
+                    .padding(top = 20.dp)
+            ) {
                 Image(
                     painter = painterResource(id = R.drawable.white),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
+                    modifier = Modifier.fillMaxSize()
                 )
                 Column(
                     modifier = Modifier
@@ -103,30 +100,43 @@ fun LoginView( navController: NavController){
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "UVShop", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold), color = Color.Black, modifier = Modifier.scale(2.5f) )
-                    Text(text = "Ingresa para iniciar", modifier = Modifier.padding(top = 12.dp), color = Color.Gray)
+                    Text(
+                        text = stringResource(id = R.string.app_name),
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                        color = Color.Black,
+                        modifier = Modifier.scale(2.5f)
+                    )
+                    Text(
+                        text = stringResource(id = R.string.enter_to_start),
+                        modifier = Modifier.padding(top = 12.dp),
+                        color = Color.Gray
+                    )
 
                     Text(
-                        text = "CORRE INSTITUCIONAL",
+                        text = stringResource(id = R.string.institutional_email),
                         color = Color.Gray,
                         modifier = Modifier.padding(top = 16.dp),
                         textAlign = TextAlign.Left
                     )
                     TextField(
                         value = username,
-                        onValueChange = {username =it},
-                        label = { Text("cuenta@uvg.edu.gt") },
+                        onValueChange = { username = it },
+                        label = { Text(stringResource(id = R.string.email_hint)) },
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
                             .padding(top = 4.dp)
                             .clip(RoundedCornerShape(16.dp))
                     )
 
-                    Text(text = "CONTRASEÑA", modifier = Modifier.padding(top = 16.dp), color = Color.Gray)
+                    Text(
+                        text = stringResource(id = R.string.password),
+                        modifier = Modifier.padding(top = 16.dp),
+                        color = Color.Gray
+                    )
                     TextField(
                         value = password,
-                        onValueChange = {password = it},
-                        label = { Text("*******") },
+                        onValueChange = { password = it },
+                        label = { Text(stringResource(id = R.string.password_hint)) },
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
                             .padding(top = 4.dp)
@@ -137,7 +147,7 @@ fun LoginView( navController: NavController){
 
                     Button(
                         onClick = {
-                                  navController.navigate(Route.HOME)
+                            navController.navigate(Route.HOME)
                         },
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
@@ -145,22 +155,22 @@ fun LoginView( navController: NavController){
                             .clip(RoundedCornerShape(16.dp)),
                         colors = ButtonDefaults.buttonColors(Color.Green)
                     ) {
-                        Text(text = "Ingresar", color = Color.White)
+                        Text(text = stringResource(id = R.string.login_button_text), color = Color.White)
                     }
 
                     Text(
-                        text = "¿Olvidaste tu contraseña?",
+                        text = stringResource(id = R.string.forgot_password),
                         modifier = Modifier
                             .padding(top = 16.dp)
-                            .clickable {},
+                            .clickable { },
                         color = Color.Gray
                     )
 
                     Text(
-                        text = "Solicita ayuda",
+                        text = stringResource(id = R.string.request_help),
                         modifier = Modifier
                             .padding(top = 16.dp)
-                            .clickable {},
+                            .clickable { },
                         color = Color.Gray
                     )
                 }
