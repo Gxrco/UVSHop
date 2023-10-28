@@ -42,7 +42,6 @@ import androidx.navigation.NavController
 import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginView( navController: NavController){
@@ -89,7 +88,6 @@ fun LoginView( navController: NavController){
                 .fillMaxWidth()
                 .fillMaxSize()
                 .padding(top = 20.dp)
-                .background(color = Color.White)
             ){
                 Image(
                     painter = painterResource(id = R.drawable.white),
@@ -97,7 +95,6 @@ fun LoginView( navController: NavController){
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
                 )
                 Column(
                     modifier = Modifier

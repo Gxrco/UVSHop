@@ -48,7 +48,7 @@ fun CarouselCard(){
     )
     val scope = rememberCoroutineScope()
     Column(modifier = Modifier
-        .fillMaxSize(),
+        .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HorizontalPager(count = sliderList.size, state = pagerState, contentPadding = PaddingValues(horizontal = 16.dp),
@@ -86,7 +86,7 @@ fun CarouselCard(){
             }
         }
         Row(modifier = Modifier
-            .height(50.dp)
+            .height(20.dp)
             .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
