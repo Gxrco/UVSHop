@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">UVSHop</string>
+    <string name="precioreal">Q 20.00</string>
+    <string name="anadiralcarrito">Añadir al carrito</string>
     <string name="home">Home</string>
     <string name="shop">Shop</string>
     <string name="profile">Profile</string>
@@ -51,9 +53,17 @@
         <item>Servicio</item>
     </string-array>
     <string name="emprendimiento_nombre">Nombre de Emprendimiento</string>
-
+    <string name="titulo">Nombre del producto</string>
     <string name="user_name">JUAN CARLOS BODOQUE</string>
     <string name="manage_store">Gestionar mi tienda</string>
     <string name="my_orders">MIS PEDIDOS</string>
     <string name="addresses">DIRECCIONES</string>
+    <string name="loremextend">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+        semper est justo, in tempus nibh pharetra at. Vestibulum venenatis consectetur dolor.
+        Vivamus in mauris sodales, posuere lectus in, lobortis nisl. Integer at erat laoreet,
+        aliquam tellus non, suscipit ligula. Nullam congue diam turpis, nec accumsan neque convallis
+        et. Nam rutrum quis dolor id varius. Quisque tempor nunc et orci rutrum vehicula arcu.
+        Cras pharetra eu arcu ac iaculis. Class aptent taciti sociosqu ad litora torquent per
+        conubia nostra, per inceptos himenaeos.</string>
+    <string name="tienda">Tienda: Nombre de la tienda</string>
 </resources>
