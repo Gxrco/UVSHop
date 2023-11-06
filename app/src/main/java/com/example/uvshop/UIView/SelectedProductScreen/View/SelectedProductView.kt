@@ -34,13 +34,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.uvshop.R
 
-class SelectedProductView {
+class SelectedProductView() {
     @SuppressLint("NotConstructor")
-    @Preview
     @Composable
-    fun SelectedProductView(){
+    fun SelectedProductView(navController: NavController){
         Box(Modifier.fillMaxSize()){
             LazyColumn(
                 modifier = Modifier
@@ -49,7 +50,7 @@ class SelectedProductView {
             ){
                 item{
                     Image(
-                        painter = painterResource(id = R.drawable.product),
+                        painter = painterResource(id = R.drawable.logo),
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -84,7 +85,9 @@ class SelectedProductView {
                 }
             }
             IconButton(
-                onClick = {},
+                onClick = {
+                          navController.popBackStack()
+                },
                 modifier = Modifier
                     .padding(10.dp)
                     .align(Alignment.TopStart)

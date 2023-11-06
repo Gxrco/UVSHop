@@ -13,14 +13,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.uvshop.DataBase.SignIn.GoogleAuthUiClient
 import com.example.uvshop.Navigation.NavigationState
 import com.example.uvshop.Navigation.Route
 import com.example.uvshop.Navigation.TOP_LEVEL_DESTINATIONS
 import com.example.uvshop.Navigation.TopLevelDestination
 import com.example.uvshop.ui.theme.UVSHopTheme
 import com.example.uvshop.Navigation.NavigationTabs
+import com.google.android.gms.auth.api.identity.Identity
 
 class MainActivity : ComponentActivity() {
 
@@ -28,6 +31,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             UVSHopTheme {
+                val googleAuthUiClient by lazy {
+                    GoogleAuthUiClient(
+                        context = applicationContext,
+                        oneTapClient = Identity.getSignInClient(applicationContext)
+                    )
+                }
+
                 val navController = rememberNavController()
                 val navigateAction = remember(navController){
                     NavigationState(navController)
@@ -38,7 +48,10 @@ class MainActivity : ComponentActivity() {
                 NavigationTabs(
                     navController = navController,
                     selectedDestination = selectedDestination,
-                    navigateTopLevelDestination = navigateAction::navigateTo
+                    navigateTopLevelDestination = navigateAction::navigateTo,
+                    googleAuthUiClient = googleAuthUiClient,
+                    lifecycleScope = lifecycleScope,
+                    applicationContext = applicationContext
                 )
             }
         }

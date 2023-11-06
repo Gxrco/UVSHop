@@ -45,6 +45,7 @@
     <string name="descripcion">DESCRIPCIÓN</string>
     <string name="normas_acuerdo">Estoy de acuerdo con cumplir las normas\ndentro de la aplicación</string>
     <string name="registrar">Registrar</string>
+    <string name="web_client_id">304864599083-luineer1847v1hbop4tqam3341diqaj1.apps.googleusercontent.com </string>
     <string name="selecciona_categoria">Selecciona la categoría</string>
     <string-array name="categoria_options">
         <item>Tecnologia</item>

@@ -53,4 +53,5 @@ object Route{
     const val PRODUCT = "product"
     const val MYSHOP = "myshop"
     const val REGISTER = "register"
+    const val SELECTED = "selected"
 }

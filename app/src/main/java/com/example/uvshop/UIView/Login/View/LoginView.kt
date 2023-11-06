@@ -1,5 +1,6 @@
 package com.example.uvshop.UIView.Login.View
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,14 +43,29 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.uvshop.DataBase.SignIn.SignInState
 import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginView(navController: NavController) {
+fun LoginView(
+    navController: NavController,
+    state: SignInState,
+    onSignInClick: () -> Unit
+) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    LaunchedEffect(key1 = state.signInError) {
+        state.signInError?.let { error ->
+            Toast.makeText(
+                context,
+                error,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -116,7 +134,7 @@ fun LoginView(navController: NavController) {
                         text = stringResource(id = R.string.institutional_email),
                         color = Color.Gray,
                         modifier = Modifier.padding(top = 16.dp),
-                        textAlign = TextAlign.Left
+                        textAlign = TextAlign.Left,
                     )
                     TextField(
                         value = username,
@@ -146,9 +164,9 @@ fun LoginView(navController: NavController) {
                     )
 
                     Button(
-                        onClick = {
-                            navController.navigate(Route.HOME)
-                        },
+                        onClick = onSignInClick //{
+                            //navController.navigate(Route.HOME)
+                        /*}*/,
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
                             .padding(top = 16.dp)

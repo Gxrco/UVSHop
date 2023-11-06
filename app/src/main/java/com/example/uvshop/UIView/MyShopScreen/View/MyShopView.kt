@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -177,6 +178,9 @@ fun MyShopView(navController: NavController) {
                                                 .clip(RoundedCornerShape(15.dp))
                                                 .background(Color.LightGray)
                                                 .height(160.dp)
+                                                .clickable {
+                                                    navController.navigate(route =  Route.SELECTED)
+                                                }
                                         ) {
                                             Text(
                                                 text = it,
