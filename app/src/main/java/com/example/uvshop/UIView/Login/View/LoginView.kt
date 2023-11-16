@@ -8,13 +8,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.Icon
+import androidx.compose.material.SnackbarDefaults.backgroundColor
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -54,8 +61,6 @@ fun LoginView(
     state: SignInState,
     onSignInClick: () -> Unit
 ) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
     val context = LocalContext.current
     LaunchedEffect(key1 = state.signInError) {
         state.signInError?.let { error ->
@@ -118,6 +123,7 @@ fun LoginView(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    Spacer(Modifier.height(60.dp))
                     Text(
                         text = stringResource(id = R.string.app_name),
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
@@ -130,67 +136,22 @@ fun LoginView(
                         color = Color.Gray
                     )
 
-                    Text(
-                        text = stringResource(id = R.string.institutional_email),
-                        color = Color.Gray,
-                        modifier = Modifier.padding(top = 16.dp),
-                        textAlign = TextAlign.Left,
-                    )
-                    TextField(
-                        value = username,
-                        onValueChange = { username = it },
-                        label = { Text(stringResource(id = R.string.email_hint)) },
-                        modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                            .padding(top = 4.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                    )
-
-                    Text(
-                        text = stringResource(id = R.string.password),
-                        modifier = Modifier.padding(top = 16.dp),
-                        color = Color.Gray
-                    )
-                    TextField(
-                        value = password,
-                        onValueChange = { password = it },
-                        label = { Text(stringResource(id = R.string.password_hint)) },
-                        modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                            .padding(top = 4.dp)
-                            .clip(RoundedCornerShape(16.dp)),
-                        visualTransformation = PasswordVisualTransformation(),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-                    )
-
+                    Spacer(modifier = Modifier.height(100.dp))
                     Button(
-                        onClick = onSignInClick //{
-                            //navController.navigate(Route.HOME)
-                        /*}*/,
-                        modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                            .padding(top = 16.dp)
-                            .clip(RoundedCornerShape(16.dp)),
-                        colors = ButtonDefaults.buttonColors(Color.Green)
-                    ) {
-                        Text(text = stringResource(id = R.string.login_button_text), color = Color.White)
+                        modifier = Modifier.fillMaxWidth(0.75f),
+                        onClick = onSignInClick,
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFCCC4D6))
+                    ){
+                        Image(
+                            modifier = Modifier.size(15.dp),
+                            painter = painterResource(
+                            id = R.drawable.google),
+                            contentDescription = null,
+                        )
+                        Spacer(Modifier.width(15.dp))
+                        Text(text = "SIGN IN WITH GOOGLE")
                     }
-
-                    Text(
-                        text = stringResource(id = R.string.forgot_password),
-                        modifier = Modifier
-                            .padding(top = 16.dp)
-                            .clickable { },
-                        color = Color.Gray
-                    )
-
-                    Text(
-                        text = stringResource(id = R.string.request_help),
-                        modifier = Modifier
-                            .padding(top = 16.dp)
-                            .clickable { },
-                        color = Color.Gray
-                    )
+                    Spacer(modifier = Modifier.height(100.dp))
                 }
             }
         }
