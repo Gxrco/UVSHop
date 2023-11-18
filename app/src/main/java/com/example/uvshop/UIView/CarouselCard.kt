@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -29,6 +30,7 @@ import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Scale
+import com.example.uvshop.DataBase.Data.globalVariables
 import com.example.uvshop.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -41,11 +43,7 @@ import kotlin.math.absoluteValue
 @Composable
 fun CarouselCard(){
     val pagerState = rememberPagerState(initialPage = 1)
-    val sliderList = listOf(
-        R.drawable.fondo,
-        R.drawable.fondo,
-        R.drawable.fondo
-    )
+    val sliderList = globalVariables.listProducts
     val scope = rememberCoroutineScope()
     Column(modifier = Modifier
         .fillMaxWidth(),
@@ -76,13 +74,9 @@ fun CarouselCard(){
             Card(
                 shape = RoundedCornerShape(10.dp)
             ){
-                AsyncImage(model = ImageRequest.Builder(LocalContext.current)
-                    .data(sliderList[page])
-                    .crossfade(true)
-                    .scale(Scale.FILL)
-                    .build(), contentDescription = null,
-                    placeholder = null,
-                    error = null,)
+                Text(text = sliderList[page].name.toString())
+                Text(text = sliderList[page].description.toString())
+                Text(text = sliderList[page].price.toString())
             }
         }
         Row(modifier = Modifier

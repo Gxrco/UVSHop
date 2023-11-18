@@ -49,7 +49,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.uvshop.Data.Product
+import com.example.uvshop.DataBase.Data.DataViewModel
+import com.example.uvshop.DataBase.Data.globalVariables
 import com.example.uvshop.DataBase.SignIn.SignInState
 import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
@@ -59,7 +63,7 @@ import com.example.uvshop.R
 fun LoginView(
     navController: NavController,
     state: SignInState,
-    onSignInClick: () -> Unit
+    onSignInClick: () -> Unit,
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = state.signInError) {
@@ -139,7 +143,9 @@ fun LoginView(
                     Spacer(modifier = Modifier.height(100.dp))
                     Button(
                         modifier = Modifier.fillMaxWidth(0.75f),
-                        onClick = onSignInClick,
+                        onClick = {
+                            onSignInClick
+                                  },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFCCC4D6))
                     ){
                         Image(

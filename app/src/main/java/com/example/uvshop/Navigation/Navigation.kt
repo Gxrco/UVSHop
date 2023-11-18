@@ -24,6 +24,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.uvshop.DataBase.Data.DataViewModel
+import com.example.uvshop.DataBase.Data.globalVariables
 import com.example.uvshop.DataBase.SignIn.GoogleAuthUiClient
 import com.example.uvshop.DataBase.SignIn.SignInViewModel
 import com.example.uvshop.MainActivity
@@ -48,7 +50,9 @@ fun NavigationTabs(
     navigateTopLevelDestination: (TopLevelDestination) -> Unit,
     googleAuthUiClient: GoogleAuthUiClient,
     lifecycleScope: LifecycleCoroutineScope,
-    applicationContext: Context
+    applicationContext: Context,
+    dataViewModel: DataViewModel = viewModel()
+
 ) {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.fillMaxSize()) {
@@ -64,6 +68,12 @@ fun NavigationTabs(
 
                     LaunchedEffect(key1 = Unit) {
                         if(googleAuthUiClient.getSignedInUser() != null) {
+                            var lisShop = globalVariables.listShop
+                            var listproduct = globalVariables.listProducts
+
+                            lisShop = dataViewModel.state.value
+                            listproduct = globalVariables.listShop.flatMap { it.products.orEmpty() }
+
                             navController.navigate(route = Route.PROFILE)
                         }
                     }

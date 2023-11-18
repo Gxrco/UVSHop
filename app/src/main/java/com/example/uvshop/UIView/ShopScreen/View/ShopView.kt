@@ -48,13 +48,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.uvshop.Data.Shop
+import com.example.uvshop.DataBase.Data.DataViewModel
 import com.example.uvshop.R
 import com.example.uvshop.UIView.UserScreen.View.GlobalData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShopView(navController: NavController) {
+fun ShopView(navController: NavController, dataViewModel: DataViewModel = viewModel()) {
     var entrepreneurName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var checked by remember { mutableStateOf(false) }
@@ -190,8 +193,8 @@ fun ShopView(navController: NavController) {
                                         checkmarkColor = Color.LightGray
                                     ),
                                     modifier = Modifier
-                                        .size(40.dp) // Adjust the size as needed
-                                        .clip(CircleShape) // Apply the circular shape modifier
+                                        .size(40.dp)
+                                        .clip(CircleShape)
                                 )
                                 Text(
                                     text = stringResource(id = R.string.normas_acuerdo),
@@ -204,6 +207,7 @@ fun ShopView(navController: NavController) {
                             Button(
                                 onClick = {
                                     navController.popBackStack()
+                                    val shop = Shop(name = entrepreneurName, category = "null", description = description, products = emptyList(), reference = "null")
                                     GlobalData.myGlobalVariable = true
                                 },
                                 modifier = Modifier

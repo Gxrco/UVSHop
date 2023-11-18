@@ -14,8 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.uvshop.DataBase.Data.DataViewModel
+import com.example.uvshop.DataBase.Data.globalVariables
 import com.example.uvshop.DataBase.SignIn.GoogleAuthUiClient
 import com.example.uvshop.Navigation.NavigationState
 import com.example.uvshop.Navigation.Route
@@ -31,6 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             UVSHopTheme {
+
                 val googleAuthUiClient by lazy {
                     GoogleAuthUiClient(
                         context = applicationContext,

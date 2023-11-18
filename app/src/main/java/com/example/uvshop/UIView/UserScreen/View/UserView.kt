@@ -56,7 +56,6 @@ import com.example.uvshop.UIView.CarouselCard
 @Composable
 fun UserView(
     navController: NavController,
-    userData: UserData
 ){
     val addresses = listOf("HOGAR", "UNIVERSIDAD", "HOTEL", "PARQUE", "CIUDAD", "OFICINA")
     LazyColumn(){
