@@ -48,10 +48,20 @@ suspend fun getDataFromFirestore(): List<Shop> {
     var shopList = emptyList<Shop>()
 
     try {
-        shopList = db.collection("UVShop")
+        val querySnapshot = db.collection("UVShop")
             .get()
             .await()
-            .map { it.toObject(Shop::class.java) }
+
+        shopList = querySnapshot.documents.map { shopDocument ->
+            val shop = shopDocument.toObject(Shop::class.java)
+
+            val postCollection = shopDocument.reference.collection("Post").get().await()
+            val productList = postCollection.documents.map { postDocument ->
+                postDocument.toObject(Product::class.java)
+            }
+
+            shop?.copy(products = (productList ?: emptyList()) as List<Product>)
+        }.filterNotNull()
     } catch (e: FirebaseFirestoreException) {
         Log.d("Error", "get data from firestore: $e")
     }
@@ -72,8 +82,16 @@ suspend fun addDataToFirestore(shop: Shop, shopName: String, productName: String
 
         db.collection("UVShop").document(shopName).set(data).await()
 
+        val productListData = shop.products.map { product ->
+            mapOf(
+                "name" to product.name,
+                "price" to product.price,
+                "description" to product.description
+            )
+        }
+
         val dontData = hashMapOf(
-            "products" to shop.products
+            "products" to productListData
         )
 
         db.collection("UVShop").document(shopName).collection("Post").document(productName).set(dontData).await()

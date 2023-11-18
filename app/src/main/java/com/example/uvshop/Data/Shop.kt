@@ -1,6 +1,5 @@
 package com.example.uvshop.Data
 
-import java.io.Serializable
 
 data class Shop(
     val name: String = "",

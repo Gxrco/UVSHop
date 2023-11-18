@@ -68,11 +68,6 @@ fun NavigationTabs(
 
                     LaunchedEffect(key1 = Unit) {
                         if(googleAuthUiClient.getSignedInUser() != null) {
-                            var lisShop = globalVariables.listShop
-                            var listproduct = globalVariables.listProducts
-
-                            lisShop = dataViewModel.state.value
-                            listproduct = globalVariables.listShop.flatMap { it.products.orEmpty() }
 
                             navController.navigate(route = Route.PROFILE)
                         }

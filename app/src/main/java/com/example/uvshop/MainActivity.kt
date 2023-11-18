@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             UVSHopTheme {
+                val dataViewModel: DataViewModel = viewModel()
 
                 val googleAuthUiClient by lazy {
                     GoogleAuthUiClient(
@@ -41,6 +42,8 @@ class MainActivity : ComponentActivity() {
                         oneTapClient = Identity.getSignInClient(applicationContext)
                     )
                 }
+                globalVariables.listShop = dataViewModel.state.value
+                globalVariables.listProducts = globalVariables.listShop.flatMap { it.products.orEmpty() }
 
                 val navController = rememberNavController()
                 val navigateAction = remember(navController){

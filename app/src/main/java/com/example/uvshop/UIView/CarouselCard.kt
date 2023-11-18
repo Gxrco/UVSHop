@@ -25,6 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImage
@@ -44,6 +46,7 @@ import kotlin.math.absoluteValue
 fun CarouselCard(){
     val pagerState = rememberPagerState(initialPage = 1)
     val sliderList = globalVariables.listProducts
+
     val scope = rememberCoroutineScope()
     Column(modifier = Modifier
         .fillMaxWidth(),
@@ -74,9 +77,9 @@ fun CarouselCard(){
             Card(
                 shape = RoundedCornerShape(10.dp)
             ){
-                Text(text = sliderList[page].name.toString())
-                Text(text = sliderList[page].description.toString())
-                Text(text = sliderList[page].price.toString())
+                Text(text = sliderList[page].name, fontWeight = FontWeight.Bold)
+                Text(text = sliderList[page].description)
+                Text(text = "Price: ${sliderList[page].price}")
             }
         }
         Row(modifier = Modifier
