@@ -51,12 +51,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.uvshop.DataBase.Data.DataViewModel
+import com.example.uvshop.DataBase.SignIn.UserDataHolder
 import com.example.uvshop.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductView(navController: NavController) {
+fun ProductView(
+    navController: NavController,
+    dataViewModel: DataViewModel = viewModel()
+) {
 
     var product by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
@@ -210,7 +216,10 @@ fun ProductView(navController: NavController) {
                             ) {
                                 Box(
                                     modifier = Modifier
-                                        .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
+                                        .background(
+                                            shape = RoundedCornerShape(20),
+                                            color = Color(0xFFCCC4D6)
+                                        )
                                         .size(80.dp),
                                 ) {
                                     Icon(
@@ -225,7 +234,10 @@ fun ProductView(navController: NavController) {
                                 Spacer(Modifier.width(15.dp))
                                 Box(
                                     modifier = Modifier
-                                        .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
+                                        .background(
+                                            shape = RoundedCornerShape(20),
+                                            color = Color(0xFFCCC4D6)
+                                        )
                                         .size(80.dp),
                                 ) {
                                     Icon(
@@ -240,7 +252,10 @@ fun ProductView(navController: NavController) {
                                 Spacer(Modifier.width(15.dp))
                                 Box(
                                     modifier = Modifier
-                                        .background(shape = RoundedCornerShape(20), color = Color(0xFFCCC4D6))
+                                        .background(
+                                            shape = RoundedCornerShape(20),
+                                            color = Color(0xFFCCC4D6)
+                                        )
                                         .size(80.dp),
                                 ) {
                                     Icon(
@@ -256,6 +271,8 @@ fun ProductView(navController: NavController) {
                             Button(
                                 onClick = {
                                     navController.popBackStack()
+                                    val userData = UserDataHolder.getInstance().getUserData()
+                                    dataViewModel.addData(userData?.shop, price, description)
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)

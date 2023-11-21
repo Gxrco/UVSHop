@@ -3,17 +3,20 @@ package com.example.uvshop.DataBase.Data
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.uvshop.Data.Product
 import com.example.uvshop.Data.Shop
-import com.google.accompanist.pager.ExperimentalPagerApi
+import com.example.uvshop.DataBase.SignIn.UserData
+import com.example.uvshop.DataBase.SignIn.UserDataHolder
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 
 object globalVariables: ViewModel(){
@@ -34,11 +37,39 @@ class DataViewModel: ViewModel(){
         }
     }
 
-    fun addData(shop: Shop, shopName: String, productName: String){
+    fun addData(shop: Shop?, shopName: String, productName: String){
         viewModelScope.launch {
             addDataToFirestore(shop, shopName, productName)
 
             state.value = getDataFromFirestore()
+        }
+    }
+
+    fun fetchAndAssignUserShop(userEmail: String) {
+        viewModelScope.launch {
+            val userShop = getUserShopFromFirestore(userEmail)
+            userShop?.let { shop ->
+                UserDataHolder.getInstance().setUserShop(shop = shop)
+            }
+        }
+    }
+
+    private suspend fun getUserShopFromFirestore(userEmail: String): Shop? = withContext(Dispatchers.IO) {
+        val db = FirebaseFirestore.getInstance()
+        try {
+            val querySnapshot = db.collection("UVShop")
+                .whereEqualTo("reference", userEmail)
+                .get()
+                .await()
+
+            if (querySnapshot.documents.isNotEmpty()) {
+                querySnapshot.documents.first().toObject<Shop>()
+            } else {
+                null
+            }
+        } catch (e: FirebaseFirestoreException) {
+            Log.d("Error", "get user shop from firestore: $e")
+            null
         }
     }
 }
@@ -69,20 +100,20 @@ suspend fun getDataFromFirestore(): List<Shop> {
     return shopList
 }
 
-suspend fun addDataToFirestore(shop: Shop, shopName: String, productName: String) {
+suspend fun addDataToFirestore(shop: Shop?, shopName: String, productName: String) {
     val db = FirebaseFirestore.getInstance()
 
     try {
         val data = hashMapOf(
-            "name" to shop.name,
-            "category" to shop.category,
-            "description" to shop.description,
-            "reference" to shop.reference
+            "name" to shop?.name,
+            "category" to shop?.category,
+            "description" to shop?.description,
+            "reference" to shop?.reference
         )
 
         db.collection("UVShop").document(shopName).set(data).await()
 
-        val productListData = shop.products.map { product ->
+        val productListData = shop?.products?.map { product ->
             mapOf(
                 "name" to product.name,
                 "price" to product.price,

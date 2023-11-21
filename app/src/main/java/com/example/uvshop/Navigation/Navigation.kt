@@ -28,6 +28,7 @@ import com.example.uvshop.DataBase.Data.DataViewModel
 import com.example.uvshop.DataBase.Data.globalVariables
 import com.example.uvshop.DataBase.SignIn.GoogleAuthUiClient
 import com.example.uvshop.DataBase.SignIn.SignInViewModel
+import com.example.uvshop.DataBase.SignIn.UserData
 import com.example.uvshop.MainActivity
 import com.example.uvshop.UIView.CatalogueScreen.View.CatalogueView
 import com.example.uvshop.UIView.Login.View.LoginView
@@ -39,6 +40,7 @@ import com.example.uvshop.UIView.SelectedProductScreen.View.SelectedProductView
 import com.example.uvshop.UIView.ShopScreen.View.ShopView
 import com.example.uvshop.UIView.UserScreen.View.UserView
 import com.google.android.gms.auth.api.identity.Identity
+import com.google.firebase.firestore.auth.User
 import kotlinx.coroutines.launch
 
 
@@ -51,8 +53,7 @@ fun NavigationTabs(
     googleAuthUiClient: GoogleAuthUiClient,
     lifecycleScope: LifecycleCoroutineScope,
     applicationContext: Context,
-    dataViewModel: DataViewModel = viewModel()
-
+    dataViewModel: DataViewModel = viewModel(),
 ) {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.fillMaxSize()) {
