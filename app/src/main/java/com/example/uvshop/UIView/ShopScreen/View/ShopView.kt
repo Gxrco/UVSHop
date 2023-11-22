@@ -1,5 +1,6 @@
 package com.example.uvshop.UIView.ShopScreen.View
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -55,10 +56,11 @@ import com.example.uvshop.DataBase.Data.DataViewModel
 import com.example.uvshop.DataBase.SignIn.UserDataHolder
 import com.example.uvshop.R
 import com.example.uvshop.UIView.UserScreen.View.GlobalData
+import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShopView(navController: NavController, dataViewModel: DataViewModel = viewModel()) {
+fun ShopView(navController: NavController, dataViewModel: DataViewModel) {
     var entrepreneurName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var checked by remember { mutableStateOf(false) }
@@ -213,8 +215,13 @@ fun ShopView(navController: NavController, dataViewModel: DataViewModel = viewMo
                             Button(
                                 onClick = {
                                     navController.popBackStack()
-                                    val shop = UserDataHolder.getInstance().getUserData()
-                                        ?.let { Shop(name = entrepreneurName, category = category, description = description, products = emptyList(), reference = it.userId) }
+
+                                    val currentuser = FirebaseAuth.getInstance().currentUser!!.email
+
+                                    val shop = currentuser?.let { Shop(name = entrepreneurName, category = category, description = description, products = emptyList(), reference = it) }
+
+                                    dataViewModel.addShop(shop)
+
 
                                     GlobalData.myGlobalVariable = true
                                 },

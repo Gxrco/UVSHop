@@ -47,16 +47,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.example.uvshop.DataBase.Data.DataViewModel
 import com.example.uvshop.DataBase.SignIn.SignInState
 import com.example.uvshop.DataBase.SignIn.UserData
 import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
+import com.example.uvshop.UIView.Login.ViewModel.checkReference
 
 @Composable
 fun UserView(
-    navController: NavController,
-){
+    navController: NavController, dataViewModel: DataViewModel){
+    checkReference()
     val addresses = listOf("HOGAR", "UNIVERSIDAD", "HOTEL", "PARQUE", "CIUDAD", "OFICINA")
     LazyColumn(){
         item {

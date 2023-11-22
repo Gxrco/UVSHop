@@ -2,6 +2,7 @@ package com.example.uvshop.Navigation
 
 import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.IntentSenderRequest
@@ -53,7 +54,7 @@ fun NavigationTabs(
     googleAuthUiClient: GoogleAuthUiClient,
     lifecycleScope: LifecycleCoroutineScope,
     applicationContext: Context,
-    dataViewModel: DataViewModel = viewModel(),
+    dataViewModel: DataViewModel,
 ) {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.fillMaxSize()) {
@@ -103,6 +104,7 @@ fun NavigationTabs(
 
                     LoginView(navController = navController, state = state,
                         onSignInClick = {
+                            Log.d("TESTING GOOGLE AUTH","CLICKED")
                             lifecycleScope.launch {
                                 val signInIntentSender = googleAuthUiClient.signIn()
                                 launcher.launch(
@@ -123,16 +125,16 @@ fun NavigationTabs(
                 }
 
                 composable(route = Route.PROFILE) {
-                    UserView(navController)
+                    UserView(navController, dataViewModel)
                 }
                 composable(route = Route.SEARCH) {
                     SearchView(navController)
                 }
                 composable(route = Route.REGISTER){
-                    ShopView(navController)
+                    ShopView(navController, dataViewModel)
                 }
                 composable(route = Route.PRODUCT){
-                    ProductView(navController)
+                    ProductView(navController, dataViewModel)
                 }
                 composable(route = Route.MYSHOP){
                     MyShopView(navController)

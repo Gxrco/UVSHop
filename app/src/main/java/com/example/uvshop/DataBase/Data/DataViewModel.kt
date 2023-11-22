@@ -37,9 +37,9 @@ class DataViewModel: ViewModel(){
         }
     }
 
-    fun addShop(shop: Shop?, shopName: String, productName: String){
+    fun addShop(shop: Shop?){
         viewModelScope.launch {
-            addShopToFirestore(shop, shopName, productName)
+            addShopToFirestore(shop)
 
             state.value = getDataFromFirestore()
         }
@@ -108,7 +108,7 @@ suspend fun getDataFromFirestore(): List<Shop> {
     return shopList
 }
 
-suspend fun addShopToFirestore(shop: Shop?, shopName: String, productName: String) {
+suspend fun addShopToFirestore(shop: Shop?) {
     val db = FirebaseFirestore.getInstance()
 
     try {
@@ -119,21 +119,15 @@ suspend fun addShopToFirestore(shop: Shop?, shopName: String, productName: Strin
             "reference" to shop?.reference
         )
 
-        db.collection("UVShop").document(shopName).set(data).await()
-
-        val productListData = shop?.products?.map { product ->
-            mapOf(
-                "name" to product.name,
-                "price" to product.price,
-                "description" to product.description
-            )
+        if (shop != null) {
+            db.collection("UVShop").document(shop.name).set(data).await()
         }
 
-        val dontData = hashMapOf(
-            "products" to productListData
-        )
+        if (shop != null) {
+            db.collection("UVShop").document(shop.name).collection("Post")
+        }
 
-        db.collection("UVShop").document(shopName).collection("Post").document(productName).set(dontData).await()
+        
     } catch (e: FirebaseFirestoreException) {
         Log.d("Error", "add data to firestore: $e")
     }

@@ -57,12 +57,14 @@ import com.example.uvshop.Data.Product
 import com.example.uvshop.DataBase.Data.DataViewModel
 import com.example.uvshop.DataBase.SignIn.UserDataHolder
 import com.example.uvshop.R
+import com.example.uvshop.UIView.Login.ViewModel.getShopNameByEmail
+import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductView(
     navController: NavController,
-    dataViewModel: DataViewModel = viewModel()
+    dataViewModel: DataViewModel
 ) {
 
     var product by remember { mutableStateOf("") }
@@ -272,13 +274,22 @@ fun ProductView(
                             Button(
                                 onClick = {
                                     navController.popBackStack()
-                                    val userData = UserDataHolder.getInstance().getUserData()
+                                    val userData = FirebaseAuth.getInstance().currentUser?.email
                                     val product = Product(
                                         name = product,
                                         price = price,
                                         description = description
                                     )
-                                    userData?.shop?.name?.let { dataViewModel.addProduct(it, product) }
+
+                                    if (userData != null) {
+                                        getShopNameByEmail(userData) { shopName ->
+                                            if (shopName != null) {
+                                                dataViewModel.addProduct(shopName, product)
+                                            }
+                                        }
+
+
+                                    }
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)

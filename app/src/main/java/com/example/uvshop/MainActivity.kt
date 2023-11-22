@@ -49,7 +49,8 @@ class MainActivity : ComponentActivity() {
                     navigateTopLevelDestination = navigateAction::navigateTo,
                     googleAuthUiClient = googleAuthUiClient,
                     lifecycleScope = lifecycleScope,
-                    applicationContext = applicationContext
+                    applicationContext = applicationContext,
+                    dataViewModel = dataViewModel
                 )
             }
         }
