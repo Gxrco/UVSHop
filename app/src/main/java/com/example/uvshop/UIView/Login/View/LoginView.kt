@@ -122,7 +122,7 @@ fun LoginView(
                     Spacer(modifier = Modifier.height(100.dp))
                     Button(
                         modifier = Modifier.fillMaxWidth(0.75f),
-                        onClick = { onSignInClick },
+                        onClick = onSignInClick,
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFCCC4D6))
                     ){
                         Image(
