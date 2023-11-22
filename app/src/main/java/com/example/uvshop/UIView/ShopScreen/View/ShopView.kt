@@ -52,6 +52,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.uvshop.Data.Shop
 import com.example.uvshop.DataBase.Data.DataViewModel
+import com.example.uvshop.DataBase.SignIn.UserDataHolder
 import com.example.uvshop.R
 import com.example.uvshop.UIView.UserScreen.View.GlobalData
 
@@ -61,6 +62,7 @@ fun ShopView(navController: NavController, dataViewModel: DataViewModel = viewMo
     var entrepreneurName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var checked by remember { mutableStateOf(false) }
+    var category by remember { mutableStateOf("") }
 
     LazyColumn() {
         item {
@@ -155,7 +157,11 @@ fun ShopView(navController: NavController, dataViewModel: DataViewModel = viewMo
                                     textAlign = TextAlign.Left
                                 )
                             }
-                            DropdownMenuOpt(stringResource(id = R.string.selecciona_categoria))
+                            DropdownMenuOpt(
+                                stringResource(id = R.string.selecciona_categoria),
+                                onOptionSelected = { selectedOption ->
+                                    category = selectedOption
+                            })
                             Row(
                                 Modifier
                                     .fillMaxWidth(0.8f)
@@ -207,7 +213,9 @@ fun ShopView(navController: NavController, dataViewModel: DataViewModel = viewMo
                             Button(
                                 onClick = {
                                     navController.popBackStack()
-                                    val shop = Shop(name = entrepreneurName, category = "null", description = description, products = emptyList(), reference = "null")
+                                    val shop = UserDataHolder.getInstance().getUserData()
+                                        ?.let { Shop(name = entrepreneurName, category = category, description = description, products = emptyList(), reference = it.userId) }
+
                                     GlobalData.myGlobalVariable = true
                                 },
                                 modifier = Modifier
@@ -235,7 +243,8 @@ fun ShopView(navController: NavController, dataViewModel: DataViewModel = viewMo
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropdownMenuOpt(
-    Description: String
+    Description: String,
+    onOptionSelected: (String) -> Unit
 ) {
     var isExpanded by remember {
         mutableStateOf(false)
@@ -284,6 +293,7 @@ fun DropdownMenuOpt(
                     onClick = {
                         category = option
                         isExpanded = false
+                        onOptionSelected(option)
                     }
                 )
             }

@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.uvshop.Data.Product
 import com.example.uvshop.DataBase.Data.DataViewModel
 import com.example.uvshop.DataBase.SignIn.UserDataHolder
 import com.example.uvshop.R
@@ -272,7 +273,12 @@ fun ProductView(
                                 onClick = {
                                     navController.popBackStack()
                                     val userData = UserDataHolder.getInstance().getUserData()
-                                    dataViewModel.addData(userData?.shop, price, description)
+                                    val product = Product(
+                                        name = product,
+                                        price = price,
+                                        description = description
+                                    )
+                                    userData?.shop?.name?.let { dataViewModel.addProduct(it, product) }
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth(0.8f)
