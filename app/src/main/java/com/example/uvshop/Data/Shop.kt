@@ -6,7 +6,8 @@ data class Shop(
     val category: String = "",
     val description: String = "",
     val products: List<Product> = emptyList(),
-    val reference: String = ""
+    val reference: String = "",
+    val image: String? = null
 )
 
 

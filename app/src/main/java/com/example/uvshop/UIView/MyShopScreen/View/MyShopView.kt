@@ -1,5 +1,11 @@
 package com.example.uvshop.UIView.MyShopScreen.View
 
+import android.content.ContentValues
+import android.graphics.Bitmap
+import android.provider.MediaStore
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.launch
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,6 +28,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material3.Divider
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -39,7 +46,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -48,17 +58,58 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.example.uvshop.Data.Product
+import coil.compose.rememberAsyncImagePainter
 import com.example.uvshop.Data.Shop
 import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
+import com.example.uvshop.UIView.Login.ViewModel._selectedImageUri
 import com.example.uvshop.UIView.Login.ViewModel.getShopByCurrentUser
+import com.example.uvshop.UIView.Login.ViewModel.saveImage
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 @Composable
 fun MyShopView(navController: NavController) {
+
+    val context = LocalContext.current
+    var takenImage by remember { mutableStateOf<Bitmap?>(null) }
+    val takePictureLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.TakePicturePreview()) { bitmap: Bitmap? ->
+            if (bitmap != null) {
+                println("Success: Bitmap received.")
+                takenImage = bitmap
+                // Convert Bitmap to Uri and save it in your ViewModel
+                val uri = bitmap.let { imageBitmap ->
+                    val values = ContentValues().apply {
+                        // Ensure unique file name
+                        put(
+                            MediaStore.Images.Media.DISPLAY_NAME,
+                            "Title${System.currentTimeMillis()}.jpg"
+                        )
+                        put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+                    }
+
+                    val contentResolver = context.contentResolver
+                    val imageUri =
+                        contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+
+                    imageUri?.let {
+                        contentResolver.openOutputStream(it)?.use { outputStream ->
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+                        }
+                    }
+                    imageUri
+                }
+                saveImage(uri)
+            } else {
+                println("Error: Bitmap is null.")
+            }
+        }
+
+
     var shop by remember { mutableStateOf<Shop?>(null) }
     val scope = rememberCoroutineScope()
+
 
     LaunchedEffect(Unit) {
         scope.launch {
@@ -66,9 +117,13 @@ fun MyShopView(navController: NavController) {
         }
     }
 
-
     Box(Modifier.fillMaxSize()) {
         shop?.let { currentShop ->
+            val painter = when {
+                takenImage != null -> remember { BitmapPainter(takenImage!!.asImageBitmap()) } // Para Bitmap
+                currentShop.image != null -> rememberAsyncImagePainter(model = currentShop.image) // Para imagen de internet
+                else -> painterResource(id = R.drawable.person) // Imagen por defecto
+            }
             LazyColumn() {
                 item {
                     Box() {
@@ -93,11 +148,25 @@ fun MyShopView(navController: NavController) {
                                 )
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.person),
+                                painter = painter,
                                 contentDescription = "Foto de perfil",
                                 contentScale = ContentScale.FillBounds,
                                 modifier = Modifier.fillMaxSize()
                             )
+                            Box(modifier = Modifier.size(30.dp).zIndex(1f), contentAlignment = Alignment.TopEnd){
+                               IconButton(
+                                   onClick = {
+                                       val userUpdates = mapOf(
+                                           "image" to (_selectedImageUri.value ?: "")
+                                       )
+
+                                       takePictureLauncher.launch()
+                                       FirebaseFirestore.getInstance().collection("UVSHop").document(currentShop.name).update(userUpdates)
+                                             },
+                                   modifier = Modifier.fillMaxSize()) {
+                                   Icon(imageVector = Icons.Default.Camera, contentDescription = "")
+                               }
+                            }
                         }
                         Column(Modifier.fillMaxSize()) {
                             Row(
@@ -251,3 +320,5 @@ fun MyShopView(navController: NavController) {
         }
     }
 }
+
+

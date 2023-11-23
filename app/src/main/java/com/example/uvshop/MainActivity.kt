@@ -16,13 +16,27 @@ import com.example.uvshop.DataBase.SignIn.UserData
 import com.example.uvshop.Navigation.NavigationState
 import com.example.uvshop.Navigation.NavigationTabs
 import com.example.uvshop.Navigation.Route
+import com.example.uvshop.UIView.Login.ViewModel.getShopNameByEmail
+import com.example.uvshop.UIView.Login.ViewModel.selectedImageUri
+import com.example.uvshop.UIView.Login.ViewModel.updateShopImage
 import com.example.uvshop.ui.theme.UVSHopTheme
 import com.google.android.gms.auth.api.identity.Identity
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : ComponentActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        selectedImageUri.observe(this) { imageUrl ->
+            if (imageUrl.isNotEmpty()) {
+                getShopNameByEmail(FirebaseAuth.getInstance().currentUser?.email) { shopName ->
+                    if (shopName != null) {
+                            updateShopImage(shopName, imageUrl)
+                    }
+                }
+            }
+        }
         setContent {
             UVSHopTheme {
                 val dataViewModel: DataViewModel = viewModel()

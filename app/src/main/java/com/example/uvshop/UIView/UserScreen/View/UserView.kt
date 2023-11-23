@@ -20,6 +20,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.ShoppingCart
@@ -96,14 +99,18 @@ fun UserView(
                             .background(Color.Transparent)){
                         //Back Button
                         IconButton(
-                            onClick = {},
+                            onClick = {
+                                FirebaseAuth.getInstance().signOut()
+                                navController.navigate(route = Route.LOGIN)
+                                GlobalData.myGlobalVariable = false
+                                      },
                             modifier = Modifier
                                 .padding(30.dp)
                                 .size(35.dp)
 
                         ) {
                             Icon(
-                                imageVector = Icons.Default.ArrowBack,
+                                imageVector = Icons.Default.Logout,
                                 contentDescription = "Back",
                                 modifier = Modifier.fillMaxSize(),
                                 tint = Color.White
