@@ -4,8 +4,6 @@ import com.example.uvshop.UIView.UserScreen.View.GlobalData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
-
     fun getShopNameByEmail(currentUserEmail: String?, onResult: (String?) -> Unit) {
 
         val db = FirebaseFirestore.getInstance()

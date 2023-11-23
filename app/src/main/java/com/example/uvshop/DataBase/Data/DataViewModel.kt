@@ -22,6 +22,7 @@ import kotlinx.coroutines.withContext
 object globalVariables: ViewModel(){
     var listShop by mutableStateOf<List<Shop>>(emptyList())
     var listProducts by mutableStateOf<List<Product>>(emptyList())
+    var carrito by mutableStateOf<MutableList<Product>>(mutableListOf())
 }
 
 class DataViewModel: ViewModel(){

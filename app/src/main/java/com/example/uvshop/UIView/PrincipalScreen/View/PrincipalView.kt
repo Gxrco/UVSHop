@@ -83,21 +83,21 @@ fun PrincipalView() {
                             modifier = Modifier.padding(top = 25.dp, start = 48.dp),
                             color = Color.Gray
                         )
-                        CarouselCard()
+                        CarouselCard(null)
 
                         Text(
                             text = stringResource(id = R.string.favoritos),
                             modifier = Modifier.padding(top = 16.dp, start = 48.dp),
                             color = Color.Gray
                         )
-                        CarouselCard()
+                        CarouselCard(null)
 
                         Text(
                             text = stringResource(id = R.string.populares),
                             modifier = Modifier.padding(top = 16.dp, start = 48.dp),
                             color = Color.Gray
                         )
-                        CarouselCard()
+                        CarouselCard(null)
                     }
                 }
             }

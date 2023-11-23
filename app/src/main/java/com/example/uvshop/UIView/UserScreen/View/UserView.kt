@@ -47,6 +47,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
 import com.example.uvshop.DataBase.Data.DataViewModel
 import com.example.uvshop.DataBase.SignIn.SignInState
 import com.example.uvshop.DataBase.SignIn.UserData
@@ -54,11 +56,13 @@ import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
 import com.example.uvshop.UIView.Login.ViewModel.checkReference
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun UserView(
     navController: NavController, dataViewModel: DataViewModel){
     checkReference()
+    val user = FirebaseAuth.getInstance().currentUser
     val addresses = listOf("HOGAR", "UNIVERSIDAD", "HOTEL", "PARQUE", "CIUDAD", "OFICINA")
     LazyColumn(){
         item {
@@ -79,7 +83,7 @@ fun UserView(
                     .zIndex(1f)
                     .border(BorderStroke(3.dp, Color.LightGray), shape = RoundedCornerShape(15.dp))){
                     Image(
-                        painter = painterResource(id = R.drawable.person),
+                        painter = rememberAsyncImagePainter(model = user?.photoUrl),
                         contentDescription = "Foto de perfil",
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier.fillMaxSize()
@@ -115,7 +119,7 @@ fun UserView(
                     ) {
                         Spacer(modifier = Modifier.height(60.dp))
                         Text(
-                            text = stringResource(id = R.string.user_name), // Usar stringResource
+                            text = user?.displayName.toString(), // Usar stringResource
                             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                             color = Color.Black,
                             fontSize = 20.sp,
@@ -161,7 +165,7 @@ fun UserView(
                             )
                         }
                         Spacer(modifier = Modifier.height(10.dp))
-                        CarouselCard()
+                        CarouselCard(null)
                         Spacer(modifier = Modifier.height(30.dp))
                         AddressesList(AddressList = addresses)
                         Spacer(modifier = Modifier.height(30.dp))

@@ -23,8 +23,10 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.uvshop.DataBase.Data.DataViewModel
 import com.example.uvshop.DataBase.Data.globalVariables
 import com.example.uvshop.DataBase.SignIn.GoogleAuthUiClient
@@ -58,7 +60,6 @@ fun NavigationTabs(
 ) {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.fillMaxSize()) {
-            val productselected= SelectedProductView()
             NavHost(
                 navController = navController,
                 startDestination = Route.LOGIN,
@@ -128,7 +129,7 @@ fun NavigationTabs(
                     UserView(navController, dataViewModel)
                 }
                 composable(route = Route.SEARCH) {
-                    SearchView(navController)
+                    SearchView(navController, dataViewModel)
                 }
                 composable(route = Route.REGISTER){
                     ShopView(navController, dataViewModel)
@@ -139,8 +140,17 @@ fun NavigationTabs(
                 composable(route = Route.MYSHOP){
                     MyShopView(navController)
                 }
-                composable(route = Route.SELECTED){
-                    productselected.SelectedProductView(navController = navController)
+                composable(route = Route.SELECTED) {
+                    SelectedProductView(navController = navController, null)
+                }
+                composable(
+                    route = "selectedProduct/{productName}",
+                    arguments = listOf(navArgument("productName") { type = NavType.StringType })
+                ) { backStackEntry ->
+                    SelectedProductView(
+                        navController = navController,
+                        productName = backStackEntry.arguments?.getString("productName") ?: ""
+                    )
                 }
             }
 

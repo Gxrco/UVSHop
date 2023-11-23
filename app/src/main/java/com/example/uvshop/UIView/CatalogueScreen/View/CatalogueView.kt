@@ -14,12 +14,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +36,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.uvshop.DataBase.Data.globalVariables
 import com.example.uvshop.Navigation.Route
 import com.example.uvshop.R
 import com.example.uvshop.UIView.CarouselCard
@@ -39,6 +44,12 @@ import com.example.uvshop.UIView.CarouselCard
 
 @Composable
 fun CatalogueView(navController: NavController){
+
+    val showDialogCompra = remember { mutableStateOf(false) }
+    val showDialogLimpiar = remember { mutableStateOf(false) }
+
+
+
     Box(modifier = Modifier.fillMaxSize()){
         Image(
             painter = painterResource(id = R.drawable.fondo),
@@ -118,18 +129,18 @@ fun CatalogueView(navController: NavController){
                             .fillMaxWidth())
 
                         Text(text = stringResource(id = R.string.en_carrito), modifier = Modifier.padding(top=25.dp, start = 48.dp), color = Color.Gray)
-                        CarouselCard()
+                        CarouselCard(globalVariables.carrito)
 
                         Divider(modifier = Modifier
                             .padding(horizontal = 48.dp)
                             .fillMaxWidth())
 
                         Text(text = stringResource(id = R.string.mi_lista_deseos), modifier = Modifier.padding(top=16.dp, start = 48.dp), color = Color.Gray)
-                        CarouselCard()
+                        CarouselCard(null)
 
                         Row(modifier = Modifier.padding(start = 40.dp)) {
                             Button(
-                                onClick = {},
+                                onClick = { showDialogCompra.value = true},
                                 modifier = Modifier
                                     .padding(top = 16.dp)
                                     .clip(RoundedCornerShape(16.dp))
@@ -139,10 +150,13 @@ fun CatalogueView(navController: NavController){
                                 Text(text = stringResource(id = R.string.finalizar_compra), color = Color.White)
                             }
 
+                            Dialog(showDialog = showDialogCompra, title = "Productos agregados!", text = "Los productos han sido encargados en la tienda.")
+
                             Spacer(modifier = Modifier.width(16.dp))
 
                             Button(
-                                onClick = {},
+                                onClick = { globalVariables.carrito = mutableListOf()
+                                          showDialogLimpiar.value = true},
                                 modifier = Modifier
                                     .padding(top = 16.dp)
                                     .clip(RoundedCornerShape(16.dp))
@@ -151,6 +165,9 @@ fun CatalogueView(navController: NavController){
                             ) {
                                 Text(text = stringResource(id = R.string.limpiar_carrito), color = Color.White)
                             }
+
+                            Dialog(showDialog = showDialogLimpiar, title = "Carrito Limpiado!", text = "Los productos agregados han sido eliminados de tu carrito.")
+
                         }
 
                     }
@@ -158,5 +175,21 @@ fun CatalogueView(navController: NavController){
             }
         }
 
+    }
+}
+
+@Composable
+fun Dialog(showDialog: MutableState<Boolean>, title: String, text: String) {
+    if (showDialog.value) {
+        AlertDialog(
+            onDismissRequest = { showDialog.value = false },
+            title = { Text(title) },
+            text = { Text(text) },
+            confirmButton = {
+                Button(onClick = { showDialog.value = false }) {
+                    Text("OK")
+                }
+            }
+        )
     }
 }

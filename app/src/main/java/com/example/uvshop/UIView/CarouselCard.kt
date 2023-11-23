@@ -35,6 +35,7 @@ import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Scale
+import com.example.uvshop.Data.Product
 import com.example.uvshop.DataBase.Data.globalVariables
 import com.example.uvshop.R
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -46,9 +47,14 @@ import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CarouselCard(){
+fun CarouselCard(sliderListCart: MutableList<Product>?){
     val pagerState = rememberPagerState(initialPage = 1)
-    val sliderList = globalVariables.listProducts
+    val sliderList: List<Product> = when {
+        sliderListCart.isNullOrEmpty() -> globalVariables.listProducts
+        else -> sliderListCart
+    }
+
+
 
     val scope = rememberCoroutineScope()
     Column(modifier = Modifier
