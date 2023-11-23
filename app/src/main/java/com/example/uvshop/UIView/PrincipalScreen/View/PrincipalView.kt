@@ -57,7 +57,7 @@ fun PrincipalView() {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                         modifier = Modifier
-                            .padding(top = 20.dp, start = 270.dp)
+                            .padding(top = 20.dp, start = 240.dp)
                             .fillMaxWidth()
                             .scale(1.5f)
                     )
