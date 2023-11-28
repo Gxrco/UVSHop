@@ -17,5 +17,5 @@
 - **Live Update:**: Platform implemented with Firebase which gives a Live Experience while interacting with the app.
 
 ## Screenshots
-![Screenshot of the App](/images/ShowGit1.png)
-![Screenshot of the App](/images/ShowGit2.png)
+![Screenshot of the App](/ShowGit1.png)
+![Screenshot of the App](/ShowGit2.png)
